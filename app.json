@@ -2,6 +2,7 @@
   "expo": {
     "name": "mysurvey",
     "slug": "mysurvey",
+    "scheme": "mysurvey",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
