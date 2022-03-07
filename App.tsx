@@ -10,8 +10,7 @@ import {
 } from '@expo-google-fonts/ubuntu';
 
 import theme from './src/global/styles/theme';
-
-import { Dashboard } from './src/Dashboard';
+import { Home } from './src/screens/Home';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,7 +25,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard />
+      <Home />
     </ThemeProvider>
   );
 }
