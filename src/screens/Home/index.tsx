@@ -1,5 +1,8 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
+import { FormInput } from '../../components/FormInput';
+import { FormSelect } from '../../components/FormSelect';
+import { SubmitButton } from '../../components/SubmitButton';
 
 import {
   Container
@@ -8,7 +11,15 @@ import {
 export function Home() {
   return (
     <Container>
-      <Text>Edit this file</Text>
+      <View>
+        <Text>Nome:</Text>
+        <FormInput />
+        <Text>E-mail:</Text>
+        <FormInput />
+        <Text>Sexo:</Text>
+        <FormSelect />
+        <SubmitButton title='Gravar' onPress={() => {}}/>
+      </View>
     </Container>
   );
 }

@@ -3,12 +3,11 @@ import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 
 export const Container = styled.View`
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.background};
   width: 100%;
   height: 120px;
-
-  justify-content: flex-start;
-  align-items: flex-start;
+  padding: 10px ;
+  display: flex ;
 `;
 
 export const UserWrapper = styled.View`
