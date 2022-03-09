@@ -50,6 +50,7 @@ export function Home() {
         onPress={() => handleAddHuman(data.name, data.age, data.gender)}>
         <ButtonTitle>Novo</ButtonTitle>
       </GenerateButton>
+
     </Container>
   );
 }
