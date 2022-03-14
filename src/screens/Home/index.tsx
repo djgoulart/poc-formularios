@@ -1,8 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
-import { Button, Text, TouchableOpacityProps } from 'react-native';
+import { Text } from 'react-native';
+import { useNavigation, NavigationProp, ParamListBase } from '@react-navigation/native';
+
 import Header from '../../components/Header';
 import { HumanList } from '../../components/HumanList';
-
 import { Human } from '../../schemes/Human';
 import GlobalContext from './../../contexts/global';
 
@@ -13,27 +14,16 @@ import {
   ButtonTitle
 } from './styles';
 
-const { useRealm, useQuery } = GlobalContext;
+const { useQuery } = GlobalContext;
 
 export function Home() {
-  const data = {
-    name: 'Diego',
-    age: 34,
-    gender: 'm'
-  };
+  const { navigate }: NavigationProp<ParamListBase> = useNavigation();
 
-  const realm = useRealm();
   const result = useQuery(Human);
 
-  const humans = useMemo(() => result.sorted("createdAt"), [result]);
-
-  const handleAddHuman = useCallback(
-    (name: string, age: number, gender: string): void => {
-      realm.write(() => {
-        realm.create("Human", Human.generate(name, age, gender));
-      });
-    },
-    [realm]
+  const humans = useMemo(
+    () => result.sorted("createdAt"),
+    [result]
   );
 
   return (
@@ -43,14 +33,19 @@ export function Home() {
         {
           humans.length > 0 ? (
             <HumanList data={humans} />
-          ) : <Text>Teste</Text>
+          ) : <Text style={{
+            textAlign: 'center',
+            fontSize: 18,
+            fontWeight: "700"
+          }}>
+            Todo: Instruções iniciais
+          </Text>
         }
       </Humans>
       <GenerateButton
-        onPress={() => handleAddHuman(data.name, data.age, data.gender)}>
+        onPress={() => navigate("Form")}>
         <ButtonTitle>Novo</ButtonTitle>
       </GenerateButton>
-
     </Container>
   );
 }

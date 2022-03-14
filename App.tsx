@@ -1,8 +1,7 @@
 import React from 'react';
+import { LogBox } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import AppLoading from 'expo-app-loading'
-
-import GlobalContext from './src/contexts/global';
 
 import {
   useFonts,
@@ -11,8 +10,13 @@ import {
   Ubuntu_700Bold
 } from '@expo-google-fonts/ubuntu';
 
+import GlobalContext from './src/contexts/global';
 import theme from './src/global/styles/theme';
-import { Home } from './src/screens/Home';
+import { Routes } from './src/routes';
+
+LogBox.ignoreLogs([
+  "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
+]);
 
 const { RealmProvider } = GlobalContext;
 
@@ -34,7 +38,7 @@ export default function App() {
   return (
     <RealmProvider>
       <ThemeProvider theme={theme}>
-        <Home />
+        <Routes />
       </ThemeProvider>
     </RealmProvider>
   );

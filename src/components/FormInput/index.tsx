@@ -1,11 +1,34 @@
 import React from "react";
-import { Container } from "./styles";
+import { Control, Controller } from 'react-hook-form';
 import { TextInputProps } from "react-native";
 
-type IProps = TextInputProps;
+import { Input } from "../Input";
 
-export function FormInput( {...rest }:IProps) {
-    return (
-        <Container {...rest}/>
-    );
+import { Container } from "./styles";
+
+interface IProps extends TextInputProps {
+  control: Control;
+  name: string;
+}
+
+export function FormInput({
+  control,
+  name,
+  ...rest
+}: IProps) {
+  return (
+    <Container>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, value } }) => (
+          <Input
+            onChangeText={onChange}
+            value={value}
+            {...rest}
+          />
+        )}
+      />
+    </Container>
+  );
 }

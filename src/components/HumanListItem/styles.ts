@@ -25,7 +25,7 @@ export const Wrapper = styled.View`
   flex-direction: row;
 `;
 
-export const Age = styled.Text`
+export const Email = styled.Text`
   font-size: 14px;
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.title};

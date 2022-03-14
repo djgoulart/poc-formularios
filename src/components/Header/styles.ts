@@ -3,9 +3,9 @@ import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 
 export const Container = styled.View`
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.primary};
   width: 100%;
-  height: 120px;
+  height: 80px;
   padding: 10px ;
   display: flex ;
 `;
@@ -13,7 +13,7 @@ export const Container = styled.View`
 export const UserWrapper = styled.View`
   width: 100%;
   padding: 0 24px;
-  margin-top: 44px;
+  margin-top: 10px;
 
   flex-direction: row;
   justify-content: space-between;
