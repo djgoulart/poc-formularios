@@ -21,8 +21,7 @@ export function HumanList({ data }: Props) {
         renderItem={({ item }) => (
           <HumanListItem
             name={item.name}
-            age={item.age}
-            gender={item.gender}
+            email={item.email}
           />
         )}
       />
