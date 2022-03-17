@@ -1,10 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useNavigation, NavigationProp, ParamListBase } from '@react-navigation/native';
 
 import { Human } from '../../schemes/Human';
-import GlobalContext from './../../contexts/global';
+import { Pet } from '../../schemes/Pet';
+import GlobalContext from '../../contexts/global';
 
 import Header from '../../components/Header';
 import { FormInput } from '../../components/FormInput';
@@ -22,9 +23,13 @@ interface FormData {
 
 const { useRealm } = GlobalContext;
 
-export function Form() {
+interface Props {
+  onCloseForm: () => void;
+  humanId: Realm.BSON.ObjectId;
+}
+
+export function Animal({ onCloseForm, humanId }: Props) {
   const realm = useRealm();
-  const { navigate }: NavigationProp<ParamListBase> = useNavigation();
 
   const {
     control,
@@ -32,27 +37,29 @@ export function Form() {
     reset,
   } = useForm();
 
-  const handleAddHuman = useCallback(
-    (name: string, email: string): void => {
+  const human = realm.objectForPrimaryKey<Human>('Human', humanId);
+
+  const handleAddPet = useCallback(
+    (name: string, type: string, owner: Realm.Object): void => {
       try {
         realm.write(() => {
-          realm.create("Human",
-            Human.generate(name, email)
-          );
-        });
+          const pet = realm.create('Pet', Pet.generate(name, type));
+          human?.pets.push(pet);
+        })
       } catch (error) {
-        console.log("Error creating a Human: ", error);
+        console.log('Error creating a new Pet', error)
       }
+
     },
     [realm]
   );
 
   function handleFormSubmit(form: FormData) {
-    const { name, email } = form;
+    const { name, type } = form;
 
-    handleAddHuman(name, email);
+    handleAddPet(name, type, human!);
     reset();
-    navigate("Home");
+    onCloseForm();
   }
 
   return (
@@ -60,10 +67,10 @@ export function Form() {
       <Container>
         <Header />
         <Fields>
-          <Text>Nome:</Text>
+          <Text>Nome do Pet:</Text>
           <FormInput name='name' control={control} />
-          <Text>E-mail:</Text>
-          <FormInput textContentType='emailAddress' name='email' control={control} />
+          <Text>Que animal é?:</Text>
+          <FormInput name='type' control={control} />
         </Fields>
         <Footer>
           <SubmitButton title='Salvar' onPress={handleSubmit(handleFormSubmit)} />

@@ -1,6 +1,7 @@
-import React from 'react';
-import { FlatList, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, Modal } from 'react-native';
 import { Human } from '../../schemes/Human';
+import { Animal } from '../../screens/Animal';
 import { HumanListItem } from '../HumanListItem';
 
 import {
@@ -12,6 +13,18 @@ interface Props {
 }
 
 export function HumanList({ data }: Props) {
+  const [petsModalOpen, setPetsModalOpen] = useState(false);
+  const [selectedHuman, setSelectedHuman] = useState<Human>({} as Human)
+
+  function handleOnItemPress(item: Human) {
+    setSelectedHuman(item);
+    setPetsModalOpen(true);
+  }
+
+  function handleClosePetModal() {
+    setPetsModalOpen(false);
+  }
+
   return (
     <Container>
       <FlatList
@@ -22,9 +35,18 @@ export function HumanList({ data }: Props) {
           <HumanListItem
             name={item.name}
             email={item.email}
+            pets={item.pets.length}
+            onPress={() => handleOnItemPress(item)}
           />
         )}
       />
+
+      <Modal visible={petsModalOpen}>
+        <Animal
+          humanId={selectedHuman._id}
+          onCloseForm={handleClosePetModal}
+        />
+      </Modal>
     </Container>
   );
 }

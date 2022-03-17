@@ -1,4 +1,5 @@
 import React from 'react';
+import { Realm } from '@realm/react';
 
 import {
   Container,
@@ -12,7 +13,15 @@ import {
   Icon
 } from './styles';
 
-const Header: React.FC = () => {
+const APP_ID = 'poc-zifqi';
+const realmApp = new Realm.App({ id: APP_ID });
+
+function Header() {
+  const handleSignOut = () => {
+    console.log('user logout');
+    realmApp.currentUser?.logOut();
+  }
+
   return (
     <Container>
       <UserWrapper>
@@ -23,7 +32,7 @@ const Header: React.FC = () => {
             <UserName>Diego</UserName>
           </User>
         </UserInfo>
-        <LogoutButton onPress={() => { }}>
+        <LogoutButton onPress={() => handleSignOut}>
           <Icon name="power" />
         </LogoutButton>
       </UserWrapper>
