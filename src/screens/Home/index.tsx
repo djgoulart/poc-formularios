@@ -14,12 +14,13 @@ import {
   ButtonTitle
 } from './styles';
 
-const { useQuery } = GlobalContext;
+const { useQuery, useRealm } = GlobalContext;
 
 export function Home() {
   const { navigate }: NavigationProp<ParamListBase> = useNavigation();
+  const realm = useRealm();
 
-  const result = useQuery(Human);
+  const result = realm.objects("Human");
 
   const humans = useMemo(
     () => result.sorted("createdAt"),

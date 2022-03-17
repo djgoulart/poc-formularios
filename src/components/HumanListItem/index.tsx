@@ -1,26 +1,27 @@
 import React from 'react';
+import { TouchableOpacityProps } from 'react-native';
 
 import {
   Container,
   Name,
-  Wrapper,
   Email,
-  Gender,
-  GenderIcon
 } from './styles';
 
-interface Props {
+export interface HumanListItemProps extends TouchableOpacityProps {
   name: string;
   email: string;
+  pets?: number;
+  onPress: () => void;
 }
 
 export function HumanListItem(
-  { name, email }: Props
+  { name, email, pets, onPress }: HumanListItemProps
 ) {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Name>{name}</Name>
-      <Email>{`${email}`}</Email>
+      <Email>{email}</Email>
+      <Name>{`pets: ${pets || 0}`}</Name>
     </Container>
   );
 }

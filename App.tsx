@@ -66,7 +66,11 @@ export default function App() {
 
   if (!user || !realmApp.currentUser) {
     console.log("not signed")
-    return (<SignIn onSignIn={handleSignIn} />);
+    return (
+      <ThemeProvider theme={theme}>
+        <SignIn onSignIn={handleSignIn} />
+      </ThemeProvider>
+    );
   }
 
   return (
