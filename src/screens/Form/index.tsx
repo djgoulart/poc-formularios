@@ -6,7 +6,6 @@ import { useNavigation, NavigationProp, ParamListBase } from '@react-navigation/
 import { Human } from '../../schemes/Human';
 import GlobalContext from './../../contexts/global';
 
-import Header from '../../components/Header';
 import { FormInput } from '../../components/FormInput';
 import { SubmitButton } from '../../components/SubmitButton';
 
@@ -58,7 +57,6 @@ export function Form() {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
-        <Header />
         <Fields>
           <Text>Nome:</Text>
           <FormInput name='name' control={control} />

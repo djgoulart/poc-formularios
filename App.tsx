@@ -16,6 +16,7 @@ import theme from './src/global/styles/theme';
 
 import { Routes } from './src/routes';
 import { SignIn } from './src/screens/SignIn';
+import Header from './src/components/Header';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
@@ -76,6 +77,7 @@ export default function App() {
   return (
     <RealmProvider sync={{ user, partitionValue: realmApp.currentUser.id }}>
       <ThemeProvider theme={theme}>
+        <Header onSignOut={() => handleSignOut()} />
         <Routes />
       </ThemeProvider>
     </RealmProvider>

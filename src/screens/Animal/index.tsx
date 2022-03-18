@@ -7,7 +7,6 @@ import { Human } from '../../schemes/Human';
 import { Pet } from '../../schemes/Pet';
 import GlobalContext from '../../contexts/global';
 
-import Header from '../../components/Header';
 import { FormInput } from '../../components/FormInput';
 import { SubmitButton } from '../../components/SubmitButton';
 
@@ -65,7 +64,6 @@ export function Animal({ onCloseForm, humanId }: Props) {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
-        <Header />
         <Fields>
           <Text>Nome do Pet:</Text>
           <FormInput name='name' control={control} />
