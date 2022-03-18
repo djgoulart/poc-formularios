@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react';
 import { Text } from 'react-native';
 import { useNavigation, NavigationProp, ParamListBase } from '@react-navigation/native';
 
-import Header from '../../components/Header';
 import { HumanList } from '../../components/HumanList';
 import { Human } from '../../schemes/Human';
 import GlobalContext from './../../contexts/global';
@@ -29,7 +28,6 @@ export function Home() {
 
   return (
     <Container>
-      <Header />
       <Humans>
         {
           humans.length > 0 ? (
